@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Happy Birthday, My Love 💖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<!-- LOADING SCREEN -->
+<div id="loadingScreen">
+  <div class="loading-rose">
+    <svg viewBox="0 0 120 120" id="rosesvg" xmlns="http://www.w3.org/2000/svg">
+      <g class="rose-petal-group">
+        <ellipse class="r-petal" cx="60" cy="30" rx="12" ry="22" fill="#e63950"/>
+        <ellipse class="r-petal" cx="60" cy="30" rx="12" ry="22" fill="#c9184a" transform="rotate(45,60,60)"/>
+        <ellipse class="r-petal" cx="60" cy="30" rx="12" ry="22" fill="#e63950" transform="rotate(90,60,60)"/>
+        <ellipse class="r-petal" cx="60" cy="30" rx="12" ry="22" fill="#c9184a" transform="rotate(135,60,60)"/>
+        <ellipse class="r-petal" cx="60" cy="30" rx="12" ry="22" fill="#e63950" transform="rotate(180,60,60)"/>
+        <ellipse class="r-petal" cx="60" cy="30" rx="12" ry="22" fill="#c9184a" transform="rotate(225,60,60)"/>
+        <ellipse class="r-petal" cx="60" cy="30" rx="12" ry="22" fill="#e63950" transform="rotate(270,60,60)"/>
+        <ellipse class="r-petal" cx="60" cy="30" rx="12" ry="22" fill="#c9184a" transform="rotate(315,60,60)"/>
+      </g>
+      <circle cx="60" cy="60" r="18" fill="#ff4d6d"/>
+      <circle cx="60" cy="60" r="11" fill="#c9184a"/>
+      <circle cx="60" cy="60" r="5" fill="#FFD166"/>
+    </svg>
+  </div>
+  <p class="loading-text">Preparing something special...</p>
+</div>
+
+<!-- CURSOR TRAIL CANVAS -->
+<canvas id="cursorCanvas" aria-hidden="true"></canvas>
+
+<!-- PARTICLE / SPARKLE CANVAS -->
+<canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+<!-- CONFETTI CANVAS -->
+<canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+<!-- SCROLL PROGRESS BAR -->
+<div id="scrollProgress" aria-hidden="true">
+  <div id="scrollBar"></div>
+  <div id="scrollRose">🌹</div>
+</div>
+
+<!-- MUSIC PLAYER -->
+<div id="musicPlayer" class="hidden" aria-label="Music controls">
+  <button id="musicBtn" aria-label="Play/Pause music">
+    <span id="musicIcon">▶</span>
+  </button>
+  <div id="musicInfo">
+    <span id="musicLabel">Birthday Song</span>
+    <div id="musicProgress"><div id="musicBar"></div></div>
+    <button id="dedicateSongBtn" aria-label="Play dedicated song">🎵 A song for you</button>
+  </div>
+</div>
+<audio id="bgMusic" preload="auto">
+  <source src="Birthday_Song.mp3" type="audio/mpeg"/>
+</audio>
+<audio id="dedicatedSong" preload="auto">
+  <source src="dedicated_song.mp3" type="audio/mpeg"/>
+</audio>
+
+<!-- DEDICATED SONG REVEAL CARD -->
+<div id="songRevealCard" class="hidden" aria-label="Dedicated song">
+  <div class="song-card-inner">
+    <div class="song-card-close" id="songCardClose" aria-label="Close">✕</div>
+    <div class="song-note-icon">🎵</div>
+    <div class="song-card-title great-vibes">A Song Just For You</div>
+    <div class="song-card-artist poppins">Yabesh Thapa</div>
+    <div class="song-card-name playfair">Laakhau Hajarau</div>
+    <div class="song-card-msg poppins light">This song says everything my heart feels for you...</div>
+    <div class="song-controls">
+      <button id="songPlayBtn" class="song-play-btn" aria-label="Play dedicated song">
+        <span id="songPlayIcon">▶</span>
+      </button>
+      <div class="song-progress-wrap">
+        <div class="song-prog-bar"><div id="songProgFill"></div></div>
+        <div class="song-time"><span id="songCurrent">0:00</span> / <span id="songDuration">--:--</span></div>
+      </div>
+    </div>
+    <div class="song-vinyl" aria-hidden="true">
+      <div class="vinyl-disc" id="vinylDisc">
+        <div class="vinyl-center">🌹</div>
+      </div>
+    </div>
+    <div class="song-hearts" id="songHearts" aria-hidden="true"></div>
+  </div>
+</div>
+
+<!-- MAIN WRAPPER — all scenes live here, stacked vertically -->
+<div id="siteWrapper">
+
+<!-- ═══════════ SCENE 1: OPENING ═══════════ -->
+<section id="scene1" class="scene active-scene" aria-label="Opening scene">
+  <div class="floating-hearts-bg" aria-hidden="true" id="floatingHeartsBg"></div>
+  <div class="golden-particles" aria-hidden="true" id="goldenParticles"></div>
+  <div class="scene1-content">
+    <div id="openingMsg" class="opening-msg">
+      <div id="op1" class="op-line great-vibes"></div>
+      <div id="op2" class="op-line poppins light"></div>
+      <div id="op3" class="op-line poppins light"></div>
+      <div id="op4" class="op-line poppins light"></div>
+    </div>
+    <div id="beginBtnWrap" class="hidden">
+      <button id="beginBtn" class="btn-premium" aria-label="Begin Our Journey">
+        <span class="btn-heart">❤️</span>
+        <span class="btn-text">Let's enjoy this🥳</span>
+        <span class="btn-shine"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SCENE 2: LIGHTS OFF ═══════════ -->
+<section id="scene2" class="scene hidden-scene" aria-label="Lights scene">
+  <div id="bulbsRow" aria-hidden="true"></div>
+  <div id="darkOverlay"></div>
+  <div class="scene2-content">
+    <h2 class="great-vibes glow-text">The party is about to begin...</h2>
+    <button id="lightsBtn" class="btn-premium" aria-label="Turn On The Lights">
+      <span class="btn-text">Turn On The Lights 💡</span>
+      <span class="btn-shine"></span>
+    </button>
+  </div>
+</section>
+
+<!-- ═══════════ SCENE 3: DECORATIONS ═══════════ -->
+<section id="scene3" class="scene hidden-scene" aria-label="Decorations scene">
+  <div id="ceilingBalloons" aria-hidden="true"></div>
+  <div id="goldenRibbons" aria-hidden="true"></div>
+  <div id="fairyLightsRow" aria-hidden="true"></div>
+  <div id="butterflies" aria-hidden="true"></div>
+  <div class="scene3-content">
+    <h2 class="great-vibes glow-text" id="decoTitle">Your Birthday Party 🎉</h2>
+    <div id="decoSubtitle" class="poppins light">My love just for you...</div>
+    <button id="cakeSceneBtn" class="btn-premium" aria-label="Let's cut the cake">
+      <span class="btn-text">Let's Cut the Cake 🎂</span>
+      <span class="btn-shine"></span>
+    </button>
+  </div>
+</section>
+
+<!-- ═══════════ SCENE 4: BIRTHDAY CAKE ═══════════ -->
+<section id="scene4" class="scene hidden-scene" aria-label="Birthday cake scene">
+  <div class="scene4-content">
+    <div id="cakeWrapper3d">
+      <div id="cake3d" aria-label="Three tier birthday cake">
+        <div class="cake-tier t1">
+          <div class="tier-frosting"></div>
+          <div class="tier-drips"></div>
+          <div id="candlesRow" aria-label="Birthday candles">
+            <div class="candle" data-i="0"><div class="candle-flame"><div class="f-o"></div><div class="f-i"></div><div class="f-g"></div></div><div class="candle-body"></div></div>
+            <div class="candle smoke-holder" data-i="1"><div class="candle-flame"><div class="f-o"></div><div class="f-i"></div><div class="f-g"></div></div><div class="candle-body"></div></div>
+          </div>
+        </div>
+        <div class="cake-tier t2">
+          <div class="tier-frosting"></div>
+          <div class="tier-drips"></div>
+          <div class="tier-deco">🌹🌹</div>
+        </div>
+        <div class="cake-tier t3">
+          <div class="tier-frosting"></div>
+          <div class="tier-drips"></div>
+          <div class="tier-text poppins">Happy Birthday</div>
+        </div>
+        <div id="cakeBase"></div>
+      </div>
+    </div>
+    <div class="cake-scene-btns">
+      <button id="wishBtn" class="btn-premium" aria-label="Make A Wish">
+        <span class="btn-text">Make A Wish ✨</span>
+        <span class="btn-shine"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SCENE 5: BIRTHDAY CARD ═══════════ -->
+<section id="scene5" class="scene hidden-scene" aria-label="Birthday message card">
+  <div class="scene5-content">
+    <div id="birthdayCard" class="luxury-card" role="region" aria-label="Birthday card">
+      <div class="card-golden-border"></div>
+      <div class="ribbon-tr" aria-hidden="true"><svg viewBox="0 0 80 80"><path d="M80 0 L80 80 L0 0Z" fill="#c9184a"/><path d="M80 0 L80 80 L20 0Z" fill="#e63950" opacity="0.7"/></svg></div>
+      <div class="ribbon-br" aria-hidden="true"><svg viewBox="0 0 80 80"><path d="M80 0 L80 80 L0 80Z" fill="#c9184a"/><path d="M80 80 L80 0 L20 80Z" fill="#e63950" opacity="0.7"/></svg></div>
+      <div class="card-hearts-left" aria-hidden="true" id="cardHeartsLeft"></div>
+      <div class="card-inner">
+        <div id="cardTitle" class="card-title great-vibes"></div>
+        <div class="card-divider"><span>✦</span><span class="line"></span><span>✦</span></div>
+        <div id="cardMessage" class="card-message poppins" aria-live="polite"></div>
+      </div>
+    </div>
+    <button id="loveLetterBtn" class="btn-premium btn-sm" aria-label="Next: A love letter">
+      <span class="btn-text">A Love Letter For You 💌</span>
+      <span class="btn-shine"></span>
+    </button>
+  </div>
+</section>
+
+<!-- ═══════════ SCENE 6: LOVE LETTER ═══════════ -->
+<section id="scene6" class="scene hidden-scene" aria-label="Love letter card">
+  <div class="scene6-content">
+    <div id="loveLetterCard" class="love-letter-card" role="region" aria-label="Love letter">
+      <svg id="borderDrawSvg" viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect id="borderPath" x="8" y="8" width="484" height="584" rx="16" ry="16"
+          fill="none" stroke="#c9184a" stroke-width="2.5" stroke-dasharray="2200" stroke-dashoffset="2200"/>
+      </svg>
+      <div class="cupid-tl" aria-hidden="true">
+        <svg viewBox="0 0 80 80"><text y="65" font-size="60">💘</text></svg>
+      </div>
+      <div class="cupid-br" aria-hidden="true">
+        <svg viewBox="0 0 80 80"><text y="65" font-size="60">💘</text></svg>
+      </div>
+      <div class="ll-inner">
+        <div id="llText" class="ll-text sacramento" aria-live="polite"></div>
+      </div>
+      <div id="llHearts" class="ll-hearts-overlay" aria-hidden="true"></div>
+    </div>
+    <button id="galleryBtn" class="btn-premium btn-sm" aria-label="Reasons I love you">
+      <span class="btn-text">Reasons I Love You �</span>
+      <span class="btn-shine"></span>
+    </button>
+  </div>
+</section>
+
+<!-- ═══════════ SCENE 8: REASONS I LOVE YOU ═══════════ -->
+<section id="scene8" class="scene hidden-scene" aria-label="Reasons I love you">
+  <div class="scene8-content">
+    <h2 class="great-vibes glow-text section-title">Reasons I Love You</h2>
+    <div id="loveCards" class="love-cards-grid" role="list" aria-label="Reasons I love you"></div>
+    <button id="timelineBtn" class="btn-premium btn-sm" aria-label="Heart Rain">
+      <span class="btn-text">Heart Rain 💖</span>
+      <span class="btn-shine"></span>
+    </button>
+  </div>
+</section>
+
+<!-- ═══════════ SCENE 10: HEART RAIN ═══════════ -->
+<section id="scene10" class="scene hidden-scene" aria-label="Heart rain">
+  <canvas id="heartRainCanvas" aria-hidden="true"></canvas>
+  <div class="scene10-content">
+    <h2 class="great-vibes glow-text" id="heartRainTitle">All My Love, For You...</h2>
+    <button id="finalBtn" class="btn-premium" aria-label="Final Surprise">
+      <span class="btn-text">Final Surprise 💝</span>
+      <span class="btn-shine"></span>
+    </button>
+  </div>
+</section>
+
+<!-- ═══════════ SCENE 11: FINAL SURPRISE ═══════════ -->
+<section id="scene11" class="scene hidden-scene" aria-label="Final surprise">
+  <div class="fireworks-overlay" id="fireworksOverlay" aria-hidden="true"></div>
+  <div class="scene11-content">
+    <div id="giantHeart" class="giant-heart" role="button" tabindex="0" aria-label="Click to open heart" aria-expanded="false">
+      <div class="heart-left-door">
+        <svg viewBox="0 0 150 150"><path d="M 75 130 L 10 60 C 10 25 50 10 75 40 Z" fill="#e63950"/></svg>
+      </div>
+      <div class="heart-right-door">
+        <svg viewBox="0 0 150 150"><path d="M 75 130 L 140 60 C 140 25 100 10 75 40 Z" fill="#c9184a"/></svg>
+      </div>
+      <div class="heart-glow" aria-hidden="true"></div>
+      <div class="heart-pulse-ring" aria-hidden="true"></div>
+    </div>
+    <div id="finalMsg" class="final-message hidden" role="status" aria-live="polite">
+      <div class="final-msg-inner">
+        <div class="final-line1 great-vibes">Will you keep making memories with me forever?</div>
+        <div class="final-divider">✦ ✦ ✦</div>
+        <div class="final-line2 poppins">I love you more than words can ever say.</div>
+        <div class="final-hearts-burst" id="finalHeartsBurst" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p class="poppins">Made with endless love ❤️</p>
+    <p class="great-vibes footer-big">Happy Birthday, My Princess</p>
+  </footer>
+</section>
+
+</div><!-- end siteWrapper -->
+
+<!-- CLICK BURST OVERLAY -->
+<div id="clickBurst" aria-hidden="true"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
